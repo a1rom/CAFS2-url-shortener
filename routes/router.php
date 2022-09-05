@@ -1,5 +1,4 @@
 <?php
-
 require_once ConfigRoutes::CLASSES . 'DbLinks.php';
 $dbLinks = new DbLinks();
 $uri = $_SERVER['REQUEST_URI'];
