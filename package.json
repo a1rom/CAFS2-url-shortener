@@ -1,0 +1,23 @@
+{
+  "name": "linkshortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "dev": "mix",
+    "dev-watch": "mix watch",
+    "prod": "mix --production"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.2.0"
+  },
+  "devDependencies": {
+    "laravel-mix": "^6.0.49",
+    "resolve-url-loader": "^5.0.0",
+    "@popperjs/core": "^2.11.6",
+    "sass": "^1.54.8",
+    "sass-loader": "^12.6.0"
+  }
+}

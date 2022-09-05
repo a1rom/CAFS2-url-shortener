@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?php echo asset('/css/style.css')?>">
+    <title>Link Shortener</title>
+</head>
+<body class="container text-center bg-light text-dark ">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mt-4">
+                <p class="placeholder-glow">
+                    <span class="placeholder">
+                        <img src="https://via.placeholder.com/728x90" class="img-fluid" alt="placeholder">
+                    </span>
+                </p>
+            </div>
+            <div class="container text-center mt-3 mb-3">
+                <h1 class="row justify-content-center">Easy link shortener</h1>
+            </div>
+            <div class="container text-center mb-3 border border-gray-600 rounded-pill bg-gray-600">
+                <?php if (isset($noLink)) : ?>
+                    <div class="text-gray pt-1">I am sorry I do not have the requested link <u><?php echo ($_SERVER['HTTP_HOST']) . $uri; ?></u> in my database</div>        
+                <?php endif; ?>
+            </div>
+            <div class="container text-center mb-3">
+                <form action= "/shorten" method="post">
+                    <label class="form-label" for="url">Type in your address here: </label>
+                    <input class="form-control mb-3" type="text" name="url" id="url" placeholder="Enter URL" required>
+                    <button class="btn btn-primary" type="submit">Shorten</button>
+                </form> 
+            </div>
+            <div class="container">
+                <?php if (isset($newLink)) : ?>
+                    <p class="text-success">Shortened link:</p>
+                    <p class="font-monospace"><a href="http://<?php echo ($_SERVER['HTTP_HOST']) . $shortner->shortUri; ?>">
+                        <?php echo ($_SERVER['HTTP_HOST']) . $shortner->shortUri; ?>
+                    </a></p>
+                <?php endif; ?>
+            </div>
+            <div class="container">
+                <?php if (isset($tooManySubmissions)) : ?>
+                    <p class="text-warning">You have submitted too many links, please wait 1 minute to submit the next one</p>
+                <?php endif; ?>
+            </div>
+            <div class="container">
+                <?php if (isset($invalidLinkSubmitted)) : ?>
+                    <p class="text-danger">The submitted link is not valid or is not working, please check it in any browser window before</p>
+                <?php endif; ?>
+            </div>
+            <hr>
+            <div>
+                <?php if ($dbLinks->getLastSixRecords()) : ?>
+                    <p class="placeholder-glow">
+                        <span class="placeholder">
+                            <img src="https://via.placeholder.com/728x90" class="img-fluid" alt="placeholder">
+                        </span>
+                    </p>
+                    <div class="container text-center mt-3 mb-3">
+                        <h4 class="row justify-content-center">Latly created links</h4>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Alias</th>
+                                <th scope="col">Original Link</th>
+                                <th scope="col">Clicked</th>
+                                <th scope="col">Created</th>
+                            </tr>
+                        </thead>
+                        <?php foreach ($dbLinks->getLastSixRecords() as $link) : ?>
+                        <tbody>
+                            <tr>
+                                <td><a href="http://<?php echo ($_SERVER['HTTP_HOST']) . $link['short_link']; ?>"><?php echo $link['short_link']; ?></a></td>
+                                <td><a href="<?php echo $link['original_link']; ?>"><?php echo $link['original_link']; ?></a></td>
+                                <td><?php echo $link['clicked']; ?></td>
+                                <td><?php echo date("F j, Y, g:i a", $link['created_at']); ?></td>
+                            </tr>
+                        </tbody>
+                        <?php endforeach; ?>
+                    </table>                      
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="mt-4">
+                <p class="placeholder-glow">
+                    <span class="placeholder">
+                        <img src="https://via.placeholder.com/300x250" alt="placeholder">
+                    </span>
+                </p>
+            </div>
+            <div class="mt-4">
+                <p class="placeholder-glow">
+                    <span class="placeholder">
+                        <img src="https://via.placeholder.com/300x250" alt="placeholder">
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mt-4">
+                <p class="placeholder-glow">
+                    <span class="placeholder">
+                        <img src="https://via.placeholder.com/728x90" class="img-fluid" alt="placeholder">
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+        </div>
+    </div>
+    <script src="<?php echo asset('/js/app.js'); ?>"></script>
+</body>
+</html>
