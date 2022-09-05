@@ -1,6 +1,0 @@
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f # if the requested file doesn't exists
-RewriteCond %{REQUEST_FILENAME} !-d # if the requested dir doesn't exists
-RewriteRule ^([a-zA-Z0-9]+)/?$ redirect.php?c=$1 [L] # do rewrite of the URI if any of the above is true L flag means not to process any other rules if this one is used
-</IfModule>
